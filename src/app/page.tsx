@@ -1,102 +1,101 @@
-import Image from "next/image";
+// src/app/page.tsx
+import Head from 'next/head';
+import styles from '../styles/Home.module.css';
+import ContactForm from '../components/ContactForm';
+import ImageGallery from '../components/ImageGallery';
 
 export default function Home() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+    <div className={styles.container}>
+      <Head>
+        <title>Venta Quinta San Nicolás | Dueño Directo | Apta Crédito</title>
+        <meta name="description" content="Venta de quinta en San Nicolás de los Arroyos. Dueño directo, con pileta, galería, parque, y escritura al día. Zona tranquila, lista para habitar." />
+      </Head>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+      <a href="#contacto" className={styles.contactButton}>Contactar</a>
+
+      <header className={styles.header}>
+        <div className={styles.logo}>Venta Quinta</div>
+        <nav className={styles.nav}>
+          <a href="#galeria">Galería</a>
+          <a href="#descripcion">Descripción</a>
+          <a href="#contacto">Contacto</a>
+        </nav>
+      </header>
+
+      <div className={styles.mainLayout}>
+        <div className={styles.galleryContainer}>
+          <ImageGallery />
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
+
+        <div className={styles.infoContainer}>
+          <section className={styles.hero}>
+            <div className={styles.details}>
+              <h1>Quinta en San Nicolás de los Arroyos</h1>
+              <p className={styles.subheading}>Barrio Los Cedros - Consultar precio</p>
+              <div className={styles.tags}>
+                <span>📍 San Nicolás, Buenos Aires</span>
+                <span>📐 40x50m</span>
+                <span>✅ Escritura al día</span>
+                <span>🛏️ 2 Dormitorios</span>
+                <span>🛁 1 Baño</span>
+                <span>🌞 Orientación Este</span>
+                <span>🏡 Dueño directo</span>
+              </div>
+              <p>
+                Venta de quinta por dueño directo. Casa con pileta, parque, cochera, portón automático y galería con parillero.
+                Ideal para descanso o vivienda permanente. Dueño directo, sin comisiones. Zona tranquila con acceso rápido a la ruta.
+              </p>
+            </div>
+            <div className={styles.mapContainer}>
+              <iframe
+                title="Ubicación de la quinta"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3280.120569016248!2d-58.41730968477001!3d-34.71145128042911!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bcc642376ef1e3%3A0x3be24b02e3b4b8d!2sBarrio%20Los%20Cedros!5e0!3m2!1ses-419!2sar!4v1718064983055!5m2!1ses-419!2sar"
+                width="100%"
+                height="250"
+                style={{ border: 0 }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              ></iframe>
+            </div>
+          </section>
+        </div>
+      </div>
+
+      <section className={styles.section}>
+        <h2>Características destacadas</h2>
+        <ul className={styles.featuresList}>
+          <li>✔ Dueño directo, sin comisiones</li>
+          <li>✔ Apta crédito y escritura al día</li>
+          <li>✔ Pileta nueva con bomba sumergible</li>
+          <li>✔ Parque con riego automático</li>
+          <li>✔ Galería con parillero y toldos lona cristal</li>
+          <li>✔ Cochera doble y portón automático</li>
+          <li>✔ Seguridad: 8 cámaras, rejas y mosquiteros</li>
+          <li>✔ Conexión a internet, cable y todos los servicios</li>
+        </ul>
+      </section>
+
+      <section id="descripcion" className={styles.section}>
+        <h2>Descripción Completa</h2>
+        <p>
+          Venta de hermosa quinta por dueño directo en San Nicolás. Compuesta por dos dormitorios, cocina-comedor, baño completo.
+          Construcción con doble pared, cámara de aire, revestida con ladrillo y Cetol. Ventanas de aluminio, mosquiteros y rejas.
+        </p>
+        <p>
+          Galería cubierta con toldos de lona cristal, pileta de 10x5m construida en 2019, bomba sumergible nueva (2023), pozo adicional
+          con bomba centrifuga Czerweny para riego. Incluye depósito, lavadero, internet, cable, 8 cámaras de seguridad.
+        </p>
+      </section>
+
+      <section id="contacto" className={styles.section}>
+        <h2>¿Te interesa esta propiedad?</h2>
+        <ContactForm />
+      </section>
+
+      <footer className={styles.footer}>
+        <p>© {new Date().getFullYear()} Venta de Quinta en San Nicolás - Barrio Los Cedros | Dueño Directo</p>
       </footer>
     </div>
   );
