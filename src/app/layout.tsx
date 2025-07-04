@@ -14,16 +14,19 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Quinta San Nicolás en Venta - Dueño Directo",
-  description: "Quinta en San Nicolás de los Arroyos. Dueño directo, pileta, galería cerrada, parque amplio, apta crédito. Excelente oportunidad sin intermediarios.",
+  description:
+    "Quinta en San Nicolás de los Arroyos. Dueño directo, pileta, galería cerrada, parque amplio, apta crédito. Excelente oportunidad sin intermediarios.",
   keywords: [
     "quinta san nicolas",
     "quinta san nicolas dueño directo",
     "venta quinta san nicolas",
     "dueño directo quinta san nicolas",
-    "quinta con pileta san nicolas"
+    "quinta con pileta san nicolas",
   ],
+  verification: {
+    google: "0TGkKSIGTn_Zw6It3mBplTGrqZ3B8vy8EVDhA2UQqjU",
+  },
 };
-
 
 export default function RootLayout({
   children,
@@ -31,10 +34,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+    <html lang="es">
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         {children}
       </body>
     </html>
