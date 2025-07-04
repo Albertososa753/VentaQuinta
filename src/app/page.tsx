@@ -57,6 +57,11 @@ export default function Home() {
           name="keywords"
           content="quinta san nicolas, quinta san nicolas dueño directo, venta quinta san nicolas, quinta en venta dueño directo"
         />
+        <meta
+          name="google-site-verification"
+          content="0TGkKSIGTn_Zw6It3mBplTGrqZ3B8vy8EVDhA2UQqjU"
+        />
+
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
 
