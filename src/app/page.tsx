@@ -1,102 +1,135 @@
-// src/app/page.tsx
-import Head from 'next/head';
-import styles from '../styles/Home.module.css';
-import ContactForm from '../components/ContactForm';
-import ImageGallery from '../components/ImageGallery';
+"use client";
+
+import Head from "next/head";
+import Nav from "../components/Nav";
+import ImageSlider from "../components/ImageSlider";
+import PhotoGallery from "../components/PhotoGallery";
+import ContactForm from "../components/ContactForm";
+import Footer from "../components/Footer";
+import { Ruler, Bath, Car, Navigation } from "lucide-react";
+import MapCard from "../components/MapPhotoCard";
+import PropertyDetails from "@/components/PropertyDescription";
+import useIsMobile from "./hooks/useIsMobile";
 
 export default function Home() {
+  const isMobile = useIsMobile();
+
+  const sliderImages = [
+    "/images/principal14.jpg",
+    "/images/11.jpg",
+    "/images/12.jpg",
+    "/images/galeria.jpg",
+    "/images/quinta3.jpg",
+    "/images/quinta7.jpg",
+    "/images/13.jpg",
+    "/images/15.jpg",
+    "/images/16.jpg",
+    "/images/20.jpg",
+  ];
+
+  const ocultarEnMobile = [
+    "/images/quinta3.jpg",
+    "/images/12.jpg",
+    "/images/13.jpg",
+    "/images/quinta2.jpg",
+    "/images/15.jpg",
+  ];
+  const latitude = "-33.378139"; // 33°22'41.3"S
+  const longitude = "-60.285222"; // 60°17'06.8"W
+
+  const openGoogleMaps = () => {
+    window.open(
+      `https://www.google.com/maps/search/?api=1&query=${latitude},${longitude}`,
+      "_blank"
+    );
+  };
   return (
-    <div className={styles.container}>
+    <>
       <Head>
-        <title>Venta Quinta San Nicolás | Dueño Directo | Apta Crédito</title>
-        <meta name="description" content="Venta de quinta en San Nicolás de los Arroyos. Dueño directo, con pileta, galería, parque, y escritura al día. Zona tranquila, lista para habitar." />
+        <title>
+          Quinta en San Nicolás - Dueño Directo | Quinta en Venta San Nicolás
+        </title>
+        <meta
+          name="description"
+          content="Venta de quinta en San Nicolás. Dueño directo, sin intermediarios, 2000 m², pileta, galería cerrada, escritura inmediata. Ideal vivienda o inversión."
+        />
+        <meta
+          name="keywords"
+          content="quinta san nicolas, quinta san nicolas dueño directo, venta quinta san nicolas, quinta en venta dueño directo"
+        />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
 
-      <a href="#contacto" className={styles.contactButton}>Contactar</a>
+      <Nav />
 
-      <header className={styles.header}>
-        <div className={styles.logo}>Venta Quinta</div>
-        <nav className={styles.nav}>
-          <a href="#galeria">Galería</a>
-          <a href="#descripcion">Descripción</a>
-          <a href="#contacto">Contacto</a>
-        </nav>
-      </header>
+      <main>
+        <ImageSlider images={sliderImages} excludeOnMobile={ocultarEnMobile} />
 
-      <div className={styles.mainLayout}>
-        <div className={styles.galleryContainer}>
-          <ImageGallery />
-        </div>
-
-        <div className={styles.infoContainer}>
-          <section className={styles.hero}>
-            <div className={styles.details}>
-              <h1>Quinta en San Nicolás de los Arroyos</h1>
-              <p className={styles.subheading}>Barrio Los Cedros - Consultar precio</p>
-              <div className={styles.tags}>
-                <span>📍 San Nicolás, Buenos Aires</span>
-                <span>📐 40x50m</span>
-                <span>✅ Escritura al día</span>
-                <span>🛏️ 2 Dormitorios</span>
-                <span>🛁 1 Baño</span>
-                <span>🌞 Orientación Este</span>
-                <span>🏡 Dueño directo</span>
-              </div>
-              <p>
-                Venta de quinta por dueño directo. Casa con pileta, parque, cochera, portón automático y galería con parillero.
-                Ideal para descanso o vivienda permanente. Dueño directo, sin comisiones. Zona tranquila con acceso rápido a la ruta.
-              </p>
+        <div className="property" id="inicio">
+          <section>
+            <div className="property-header">
+              <h2>
+                BARRIO LOS CEDROS, SAN NICOLÁS DE LOS ARROYOS - Consultar precio
+              </h2>
             </div>
-            <div className={styles.mapContainer}>
-              <iframe
-                title="Ubicación de la quinta"
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3280.120569016248!2d-58.41730968477001!3d-34.71145128042911!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bcc642376ef1e3%3A0x3be24b02e3b4b8d!2sBarrio%20Los%20Cedros!5e0!3m2!1ses-419!2sar!4v1718064983055!5m2!1ses-419!2sar"
-                width="100%"
-                height="250"
-                style={{ border: 0 }}
-                allowFullScreen
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-              ></iframe>
+
+            <div className="property-features">
+              <span className="feature">
+                <Ruler size={18} /> 2000 M² de parque
+              </span>
+              <span className="feature">
+                🌤️ Galería 15m x 4m con cerramiento Lona Cristal
+              </span>
+              <span className="feature">
+                <Bath size={18} /> 1 Baño
+              </span>
+              <span className="feature">
+                <Car size={18} /> Garage 2 Autos
+              </span>
             </div>
           </section>
+
+          <section className="property-container">
+            {!isMobile && ( // Solo desktop muestra mapa acá
+              <section id="descripcion" className="property-map">
+                <MapCard />
+                <button className="maps-button" onClick={openGoogleMaps}>
+                  Ver en Google Maps <Navigation size={20} />
+                </button>
+              </section>
+            )}
+
+            <section className="property-gallery">
+              <PhotoGallery images={sliderImages} />
+            </section>
+          </section>
+
+          <div className="property-details-container">
+            <PropertyDetails />
+
+            {isMobile && ( // Solo móvil muestra mapa acá abajo de descripción
+              <section id="descripcion" className="property-map">
+                <MapCard />
+                <button className="maps-button" onClick={openGoogleMaps}>
+                  Ver en Google Maps <Navigation size={20} />
+                </button>
+              </section>
+            )}
+
+            <section id="contacto" className="seccion-contacto">
+              <div className="contact-container">
+                <h2>¿Te interesa esta propiedad?</h2>
+                <p className="contact-subtitle">
+                  Contactanos para más información o para coordinar una visita
+                </p>
+                <ContactForm />
+              </div>
+            </section>
+          </div>
         </div>
-      </div>
+      </main>
 
-      <section className={styles.section}>
-        <h2>Características destacadas</h2>
-        <ul className={styles.featuresList}>
-          <li>✔ Dueño directo, sin comisiones</li>
-          <li>✔ Apta crédito y escritura al día</li>
-          <li>✔ Pileta nueva con bomba sumergible</li>
-          <li>✔ Parque con riego automático</li>
-          <li>✔ Galería con parillero y toldos lona cristal</li>
-          <li>✔ Cochera doble y portón automático</li>
-          <li>✔ Seguridad: 8 cámaras, rejas y mosquiteros</li>
-          <li>✔ Conexión a internet, cable y todos los servicios</li>
-        </ul>
-      </section>
-
-      <section id="descripcion" className={styles.section}>
-        <h2>Descripción Completa</h2>
-        <p>
-          Venta de hermosa quinta por dueño directo en San Nicolás. Compuesta por dos dormitorios, cocina-comedor, baño completo.
-          Construcción con doble pared, cámara de aire, revestida con ladrillo y Cetol. Ventanas de aluminio, mosquiteros y rejas.
-        </p>
-        <p>
-          Galería cubierta con toldos de lona cristal, pileta de 10x5m construida en 2019, bomba sumergible nueva (2023), pozo adicional
-          con bomba centrifuga Czerweny para riego. Incluye depósito, lavadero, internet, cable, 8 cámaras de seguridad.
-        </p>
-      </section>
-
-      <section id="contacto" className={styles.section}>
-        <h2>¿Te interesa esta propiedad?</h2>
-        <ContactForm />
-      </section>
-
-      <footer className={styles.footer}>
-        <p>© {new Date().getFullYear()} Venta de Quinta en San Nicolás - Barrio Los Cedros | Dueño Directo</p>
-      </footer>
-    </div>
+      <Footer />
+    </>
   );
 }

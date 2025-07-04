@@ -13,9 +13,17 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Venta Quinta San Nicolás",
-  description: "Venta de quinta en San Nicolás de los Arroyos. Dueño directo, con pileta, galería, parque, y escritura al día. Zona tranquila, lista para habitar.",
+  title: "Quinta San Nicolás en Venta - Dueño Directo",
+  description: "Quinta en San Nicolás de los Arroyos. Dueño directo, pileta, galería cerrada, parque amplio, apta crédito. Excelente oportunidad sin intermediarios.",
+  keywords: [
+    "quinta san nicolas",
+    "quinta san nicolas dueño directo",
+    "venta quinta san nicolas",
+    "dueño directo quinta san nicolas",
+    "quinta con pileta san nicolas"
+  ],
 };
+
 
 export default function RootLayout({
   children,

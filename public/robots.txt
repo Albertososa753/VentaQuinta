@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://venta-quinta.vercel.app
+
+# Sitemaps
+Sitemap: https://venta-quinta.vercel.app/sitemap.xml
