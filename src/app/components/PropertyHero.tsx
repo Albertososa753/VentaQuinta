@@ -1,18 +1,43 @@
 "use client"
 
+import type React from "react"
 import { useState, useEffect } from "react"
 import Image from "next/image"
-import { ChevronDown, MapPin, Home, Ruler, Star } from "lucide-react"
+import { ChevronDown, ChevronLeft, ChevronRight, MapPin, Home, Ruler, Star, Bath, Car, Play, Pause } from "lucide-react"
+
 
 interface PropertyHeroProps {
   images: string[]
   excludeOnMobile?: string[]
+  title?: string
+  subtitle?: string
+  location?: string
+  features?: Array<{
+    icon: React.ReactNode
+    label: string
+  }>
+  price?: string
+  status?: string
 }
 
-export default function PropertyHero({ images, excludeOnMobile = [] }: PropertyHeroProps) {
+export default function PropertyHero({
+  images,
+  excludeOnMobile = [],
+  title = "Casa Quinta en Venta",
+  subtitle = "Buena Ubicación Apta para Vivienda",
+  location = "Barrio Los Cedros, San Nicolás de los Arroyos",
+  features = [
+    { icon: <Ruler className="feature-icon" />, label: "Parque 2000 m²" },
+    { icon: <Home className="feature-icon" />, label: "2 Dormitorios" },
+    { icon: <Bath className="feature-icon" />, label: "2 Baños" },
+    { icon: <Car className="feature-icon" />, label: "Cochera" },
+  ],
+  status = "QUINTA EN VENTA",
+}: PropertyHeroProps) {
   const [currentImage, setCurrentImage] = useState(0)
   const [isMobile, setIsMobile] = useState(false)
   const [isLoaded, setIsLoaded] = useState(false)
+  const [isPlaying, setIsPlaying] = useState(true)
 
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth <= 768)
@@ -24,17 +49,18 @@ export default function PropertyHero({ images, excludeOnMobile = [] }: PropertyH
   const filteredImages = isMobile ? images.filter((img) => !excludeOnMobile.includes(img)) : images
 
   useEffect(() => {
-    if (filteredImages.length === 0) return
+    if (filteredImages.length === 0 || !isPlaying) return
 
     const interval = setInterval(() => {
       setCurrentImage((prev) => (prev + 1) % filteredImages.length)
-    }, 4000)
+    }, 5000)
 
     return () => clearInterval(interval)
-  }, [filteredImages])
+  }, [filteredImages, isPlaying])
 
   useEffect(() => {
-    setIsLoaded(true)
+    const timer = setTimeout(() => setIsLoaded(true), 100)
+    return () => clearTimeout(timer)
   }, [])
 
   const handleScrollToProperty = () => {
@@ -44,6 +70,22 @@ export default function PropertyHero({ images, excludeOnMobile = [] }: PropertyH
     }
   }
 
+  const toggleSlideshow = () => {
+    setIsPlaying(!isPlaying)
+  }
+
+  const goToImage = (index: number) => {
+    setCurrentImage(index)
+  }
+
+  const nextImage = () => {
+    setCurrentImage((prev) => (prev + 1) % filteredImages.length)
+  }
+
+  const prevImage = () => {
+    setCurrentImage((prev) => (prev - 1 + filteredImages.length) % filteredImages.length)
+  }
+
   return (
     <section className="hero-container">
       {/* Background Images */}
@@ -51,11 +93,11 @@ export default function PropertyHero({ images, excludeOnMobile = [] }: PropertyH
         {filteredImages.map((image, index) => (
           <div key={index} className={`hero-image ${index === currentImage ? "active" : ""}`}>
             <Image
-              src={image || "/placeholder.svg"}
-              alt={`Quinta imagen ${index + 1}`}
+              src={image || "/placeholder.svg?height=1080&width=1920&query=luxury property exterior"}
+              alt={`Propiedad imagen ${index + 1}`}
               fill
               priority={index === 0}
-              quality={100}
+              quality={90}
               style={{ objectFit: "cover" }}
             />
           </div>
@@ -63,46 +105,69 @@ export default function PropertyHero({ images, excludeOnMobile = [] }: PropertyH
         <div className="hero-overlay" />
       </div>
 
-      {/* Content */}
-      <div className={`hero-content ${isLoaded ? "loaded" : ""}`}>
-        <div className="hero-badge">
-          <Star className="badge-icon" />
-          <span>QUINTA EN VENTA</span>
-        </div>
-
-        <h1 className="hero-title">
-          <span className="title-line">HERMOSA CASA QUINTA</span>
-          <span className="title-highlight">DUEÑO DIRECTO</span>
-        </h1>
-
-        <div className="hero-location">
-          <MapPin className="location-icon" />
-          <span>Barrio Los Cedros, San Nicolás de los Arroyos</span>
-        </div>
-
-        <div className="hero-features">
-          <div className="feature-item">
-            <Ruler className="feature-icon" />
-            <span>Parque 2000 m²</span>
-          </div>
-          <div className="feature-item">
-            <Home className="feature-icon" />
-            <span>2 Dormitorios</span>
-          </div>
-          {/* Agregá más features si querés, por ejemplo pileta, galería, etc */}
-          {/* <div className="feature-item">
-            <OtherIcon className="feature-icon" />
-            <span>Tu texto aquí</span>
-          </div> */}
-        </div>
-
-        <div className="hero-actions">
-          {/* Podés agregar botones o CTA aquí si es necesario */}
-        </div>
-
-        <button className="scroll-indicator" onClick={handleScrollToProperty} aria-label="Ver más información">
-          <ChevronDown className="scroll-icon" />
+      {/* Navigation Controls */}
+      <div className="hero-navigation">
+        <button className="nav-button nav-button-prev" onClick={prevImage} aria-label="Imagen anterior">
+          <ChevronLeft className="nav-icon" />
         </button>
+        <button className="nav-button nav-button-next" onClick={nextImage} aria-label="Siguiente imagen">
+          <ChevronRight className="nav-icon" />
+        </button>
+      </div>
+
+      {/* Slideshow Controls */}
+      <div className="slideshow-controls">
+        <button
+          className="control-button"
+          onClick={toggleSlideshow}
+          aria-label={isPlaying ? "Pausar slideshow" : "Reproducir slideshow"}
+        >
+          {isPlaying ? <Pause className="control-icon" /> : <Play className="control-icon" />}
+          <span className="control-text">{isPlaying ? "Pausar" : "Reproducir"}</span>
+        </button>
+      </div>
+
+      {/* Main Content */}
+      <div className="hero-content-wrapper">
+        <div className={`hero-content ${isLoaded ? "loaded" : ""}`}>
+          {/* Status Badge */}
+          <div className="hero-badge">
+            <Star className="badge-icon" />
+            <span>{status}</span>
+          </div>
+
+          {/* Title */}
+          <h1 className="hero-title">
+            <span className="title-main">{title}</span>
+            <span className="title-subtitle">{subtitle}</span>
+          </h1>
+
+          {/* Location */}
+          <div className="hero-location">
+            <MapPin className="location-icon" />
+            <span>{location}</span>
+          </div>
+
+          {/* Features */}
+          <div className="hero-features">
+            {features.map((feature, index) => (
+              <div key={index} className="feature-item">
+                {feature.icon}
+                <span className="feature-label">{feature.label}</span>
+              </div>
+            ))}
+          </div>
+
+          {/* Price */}
+         
+
+        
+
+          {/* Scroll Indicator */}
+          <button className="scroll-indicator" onClick={handleScrollToProperty} aria-label="Ver más información">
+            <ChevronDown className="scroll-icon" />
+          </button>
+        </div>
       </div>
 
       {/* Image Indicators */}
@@ -111,10 +176,17 @@ export default function PropertyHero({ images, excludeOnMobile = [] }: PropertyH
           <button
             key={index}
             className={`indicator ${index === currentImage ? "active" : ""}`}
-            onClick={() => setCurrentImage(index)}
+            onClick={() => goToImage(index)}
             aria-label={`Ver imagen ${index + 1}`}
           />
         ))}
+      </div>
+
+      {/* Image Counter */}
+      <div className="image-counter">
+        <span>
+          {currentImage + 1} / {filteredImages.length}
+        </span>
       </div>
     </section>
   )

@@ -14,28 +14,30 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://venta-quinta.vercel.app"),
-  title: "Quinta San Nicolás en Venta - Dueño Directo",
+  title: "Casa Quinta en Buena Ubicación - San Nicolás | Dueño Directo",
   description:
-    "Quinta en San Nicolás de los Arroyos. Dueño directo, pileta, galería cerrada, parque amplio, apta crédito. Excelente oportunidad sin intermediarios.",
+    "Casa quinta en venta en San Nicolás de los Arroyos. Excelente ubicación en zona residencial muy iluminada. Apta para vivienda permanente. Dueño directo, sin comisiones.",
   keywords: [
-    "quinta san nicolas",
-    "quinta san nicolas dueño directo",
+    "quinta buena ubicación san nicolas de los arroyos",
+    "casa quinta apta para vivienda permanente san nicolas",
+    "quinta san nicolas en venta",
     "venta quinta san nicolas",
-    "dueño directo quinta san nicolas",
     "quinta con pileta san nicolas",
+    "quinta dueño directo",
+    "quinta barrio los cedros san nicolas",
   ],
   openGraph: {
-    title: "Quinta en San Nicolás de los Arroyos a la Venta - Dueño Directo",
+    title: "Quinta en San Nicolás - Buena Ubicación y Apta Vivienda | Dueño Directo",
     description:
-      "Quinta en San Nicolás de los Arroyos. Dueño directo, pileta, galería cerrada, apta crédito. Oportunidad única sin intermediarios.",
+      "Casa quinta en venta en barrio Los Cedros, San Nicolás. Excelente ubicación, ideal para vivienda permanente. Dueño directo, sin comisiones.",
     url: "https://venta-quinta.vercel.app",
-    siteName: "Quinta San Nicolás en Venta", // Esto reemplaza "Vercel"
+    siteName: "Venta Quinta San Nicolás",
     images: [
       {
         url: "https://venta-quinta.vercel.app/images/principal14.jpg",
         width: 1200,
         height: 630,
-        alt: "Quinta en San Nicolás de los Arroyos en Venta",
+        alt: "Casa quinta con pileta en San Nicolás de los Arroyos",
       },
     ],
     locale: "es_AR",
@@ -48,9 +50,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="es">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
