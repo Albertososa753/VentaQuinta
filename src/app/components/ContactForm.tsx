@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Mail, User, MessageSquare, Calculator, Send } from "lucide-react";
+import { Mail, User, MessageSquare, Send } from "lucide-react";
 
 export default function ContactForm() {
   const [nombre, setNombre] = useState("");
@@ -121,7 +121,6 @@ export default function ContactForm() {
 
           <div className="form-group">
             <div className="math-question">
-              <Calculator className="input-icon" />
               <div className="math-content">
                 <label className="math-label">Verificación de seguridad:</label>
                 <div className="math-equation">

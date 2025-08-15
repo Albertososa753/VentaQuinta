@@ -3,7 +3,7 @@
 import type React from "react"
 import { useState, useEffect } from "react"
 import Image from "next/image"
-import { ChevronDown, ChevronLeft, ChevronRight, MapPin, Home, Ruler, Star, Bath, Car, Play, Pause } from "lucide-react"
+import { ChevronDown, MapPin, Home, Ruler, Star, Bath, Car, Play, Pause } from "lucide-react"
 
 
 interface PropertyHeroProps {
@@ -29,7 +29,7 @@ export default function PropertyHero({
   features = [
     { icon: <Ruler className="feature-icon" />, label: "Parque 2000 m²" },
     { icon: <Home className="feature-icon" />, label: "2 Dormitorios" },
-    { icon: <Bath className="feature-icon" />, label: "2 Baños" },
+    { icon: <Bath className="feature-icon" />, label: "Un baño" },
     { icon: <Car className="feature-icon" />, label: "Cochera" },
   ],
   status = "QUINTA EN VENTA",
@@ -74,17 +74,7 @@ export default function PropertyHero({
     setIsPlaying(!isPlaying)
   }
 
-  const goToImage = (index: number) => {
-    setCurrentImage(index)
-  }
 
-  const nextImage = () => {
-    setCurrentImage((prev) => (prev + 1) % filteredImages.length)
-  }
-
-  const prevImage = () => {
-    setCurrentImage((prev) => (prev - 1 + filteredImages.length) % filteredImages.length)
-  }
 
   return (
     <section className="hero-container">
@@ -106,14 +96,7 @@ export default function PropertyHero({
       </div>
 
       {/* Navigation Controls */}
-      <div className="hero-navigation">
-        <button className="nav-button nav-button-prev" onClick={prevImage} aria-label="Imagen anterior">
-          <ChevronLeft className="nav-icon" />
-        </button>
-        <button className="nav-button nav-button-next" onClick={nextImage} aria-label="Siguiente imagen">
-          <ChevronRight className="nav-icon" />
-        </button>
-      </div>
+  
 
       {/* Slideshow Controls */}
       <div className="slideshow-controls">
@@ -170,24 +153,7 @@ export default function PropertyHero({
         </div>
       </div>
 
-      {/* Image Indicators */}
-      <div className="hero-indicators">
-        {filteredImages.map((_, index) => (
-          <button
-            key={index}
-            className={`indicator ${index === currentImage ? "active" : ""}`}
-            onClick={() => goToImage(index)}
-            aria-label={`Ver imagen ${index + 1}`}
-          />
-        ))}
-      </div>
-
-      {/* Image Counter */}
-      <div className="image-counter">
-        <span>
-          {currentImage + 1} / {filteredImages.length}
-        </span>
-      </div>
+   
     </section>
   )
 }

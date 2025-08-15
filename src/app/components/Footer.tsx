@@ -15,7 +15,7 @@ export default function Footer() {
   }
 
   const handleWhatsAppClick = () => {
-    const phoneNumber = "5493364123456" // Reemplazar con número real
+    const phoneNumber = "5493364187524" // Reemplazar con número real
     const message = encodeURIComponent("Hola! Me interesa la quinta publicada en San Nicolás. ¿Podrían darme más información?")
     window.open(`https://wa.me/${phoneNumber}?text=${message}`, "_blank")
   }
@@ -119,7 +119,7 @@ export default function Footer() {
               <p className="copyright-subtext">Barrio Los Cedros | Dueño Directo</p>
             </div>
             <div className="footer-badge">
-              <span className="badge-text">Venta sin comisiones</span>
+              <span className="badge-text">Venta sin comision</span>
             </div>
           </div>
         </div>
